@@ -13,7 +13,6 @@ The best version is **emu_1.0_gamebreak.py**,
 it is configured to use **paint.rom** and connect to the paint server:  
 https://emu-1.quphoria.co.uk
 
-To run it without connecting to a server,
-
-uncomment `server_address = None` at the top of the file
+To run it without connecting to a server,  
+Uncomment `server_address = None` at the top of the file
 
