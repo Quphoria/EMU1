@@ -1,0 +1,77 @@
+body {
+    background-color: black;
+    background-image: radial-gradient(rgba(0, 150, 0, 0.75), black 120%);
+    height: 97vh;
+    color: white;
+    font: 1.3rem Inconsolata, monospace;
+    text-shadow: 0 0 5px #C8C8C8;
+}
+
+body::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 98vw;
+    height: 98vh;
+    background: repeating-linear-gradient(0deg,
+            rgba(black, 0.15),
+            rgba(black, 0.15) 1px,
+            transparent 1px,
+            transparent 2px);
+}
+
+h1 {
+    margin-block-start: 0.2em;
+    margin-block-end: 0;
+}
+
+a {
+    color:inherit;
+    text-decoration: none;
+ }
+
+.small {
+    min-width: 256px;
+    width: 23vw;
+    max-width: 95vw;
+    /* border: 0.1em solid rgb(63, 63, 63); */
+    border: double 3px;
+    image-rendering: pixelated;
+}
+
+.bigdiv {
+    display: block;
+    object-fit: contain;
+    height: 90%;
+    margin: 0 auto;
+}
+.big {
+    display: block;
+    object-fit: contain;
+    height: 100%;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    /* border: 0.1em solid rgb(63, 63, 63); */
+    border: double 3px;
+    image-rendering: pixelated;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 150, 0, 0.75) black;
+  }
+  
+  /* Works on Chrome/Edge/Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+  *::-webkit-scrollbar-track {
+    background: black;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color:  rgba(0, 78, 0, 0.75);
+    border: 3px solid black;
+  }

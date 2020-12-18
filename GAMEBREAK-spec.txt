@@ -1,0 +1,5 @@
+The greatest step towards the popularization of the EMU 1.0 was its entry into the home entertainment market, starting with the release of the Pluton GAMEBREAK extension. We don't have much to go on but a crumpled up reference card from a developer, a picture of a retail box, a ROM that supposedly uses the graphics and memory extensions, and a reconstructed picture of what it should display.
+
+The external memory seemed to have had 256k slots which are 18-bit addresable. The old screens are 64x64 with 6 bit color (2 bits per channel), and the Joysticks have an 8-direction stick and two buttons (X, Y).
+
+Implement the GAMEBREAK devices and make a nice demo to get some points!

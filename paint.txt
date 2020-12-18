@@ -1,0 +1,154 @@
+TODO: color Pallet at top
+Comma: Pick COLOR
+Period: Place COLOR
+Use mem to revent last pixel if revert not unsigned
+use clock for cursor???
+
+
+LBL 00 0            INIT
+    MV r8  0        LAST_X
+    NV r9  0        LAST_Y
+    MV r10 0        DPAD
+    MV r11 0        X
+    MV r12 0        Y
+    MV r13 63       COLOR
+    MV r14 0        PICK COLOR
+    MV r15 0        PLACE COLOR
+    MV r16 0        CLOCK
+    MV r20 0        MEM_HI
+    IO r20 into 20
+    JUP B00
+
+LBL E0 0            DRAW PALLETE
+    MV r11 0        X = 0
+    IO r0 into 26   SET Y
+LBL E1 0            PALLETE X LOOP
+    IO r11 into 21  MEM_MID = X
+    IO r0 into 22   MEM_LO = 0
+    IO r11 into 25  SET X
+    IO r11 into 27  DRAW COLOR X
+    IO r11 into 24  WRITE X TO MEM
+    ADD r11 r11 1   INC X
+    CMP r11 NEQ 0
+   +JUP E10
+    MV r12 1        Y=1
+
+LBL AA 0            Wait for input change while checking serial
+    IO 30 into r9
+    cmp r9 eq r10
+   +JUP C00         CHECK SERIAL
+LBL AB 0            READ INPUTS
+    MOV r11 into r8 LAST_X = X
+    MOV r10 into r9 LAST_Y = Y
+    IO 30 into r10
+    and r10 100000 into r9
+    MV r1 5
+    LShiftR r9 by r1 into r14   PICK = X
+
+    and r10 010000 into r9
+    MV r1 4
+    LShiftR r9 by r1 into r15   PLACE = Y
+
+    and r10 001000 into r9
+    cmp r9 001000  Up
+   +ADD r12 r12 111111
+    and r10 000100 into r9
+    cmp r9 000100  Down
+   +ADD r12 r12 1
+    and r10 000010 into r9
+    cmp r9 000010  Left
+   +ADD r10 r10 1
+    and r10 000001 into r9
+    cmp r9 000001  Right
+   +ADD r11 r11 1
+
+LBL AC 0            WAIT FOR NO INPUTS
+    IO 30 into r9
+    and r9 101111 into r9   IGNORE PLACE
+    cmp r9 neq 0
+   +JUP AC0
+
+LBL E2 0            HAS MOVED
+
+LBL E3 0            RESEST LAST PIXEL
+
+LBL AD 0            CHANGE PIXELS
+    IO r11 into 25  X
+    IO r12 into 26  Y
+    IO r13 into 27  COLOR
+    IO r11 into 21  MEM_MID
+    IO r12 into 22  MEM_LO
+    IO r13 into 23  MEM_WRITE
+
+LBL C0 0            CHECK SERIAL
+    IO 0 into r1
+    cmp r1 eq 0
+   +JMP AA0
+    IO 1 into r1 
+    cmp r1 meq 076
+   +JMP AA0
+
+LBL C3 0            CLEAR SERIAL BUFFER BEFORE
+    IO 0 into r1    
+    cmp r1 neq 0
+   +IO 1 into r0
+   +JMP C30
+    JMP B20         CONFIRM MESSAGE
+
+LBL C1 0            SERIAL CONFIRM
+    IO 0 into r1    
+    cmp r1 eq 0
+   +JMP C10
+    IO 1 into r1 
+    cmp r1 eq 042
+   +JMP D00
+
+LBL C2 0            CLEAR SERIAL BUFFER
+    IO 0 into r1    
+    cmp r1 neq 0
+   +IO 1 into r0
+   +JMP C20
+    JMP B20         CANCELLED
+
+LBL D0 0            UPLOAD
+    IO r0 into 21   MEM_MID
+    MV r2 1         TEMP = 1
+    IO r2 into 22   MEM_LO = 1 (TEMP)
+    MV r11 0        X
+LBL D1 0            X LOOP
+    MV r12 0        Y
+LBL D2 0            Y LOOP
+    IO 23 into r1   READ FROM MEM
+    IO r1 into 12   SEND OVER NET
+    ADD r12 r12 1   INC Y
+    CMP r12 NEQ 0
+   +JUP D20
+    ADD r11 r11 1   INC Y
+    CMP r11 NEQ 0
+   +JUP D10
+
+LBL D3 0            NET RESPONSE
+    IO 10 into r1
+    cmp r1 eq 0
+   +JUP D30
+    IO 11 into r1
+    CMP r1 neq 111111
+   +IO r1 into 2
+   +JUP D30
+    HALT
+
+LBL B0 0            SERIAL INTRO
+    "X-EYEDROPPER, Y-DRAW COLOR\n"
+    "PRESS ENTER TO UPLOAD\n"
+    MV r56 CHAR
+    IO r56 into 2
+    JUP AA0
+
+LBL B1 0            SERIAL CONFIRM TEXT
+    "THE PROGRAM WILL HALT AFTER UPLOAD\n"
+    "ARE YOU SURE [Y]\n"
+    JUP C10
+
+LBL B2 0            SERIAL CANCELLED
+    "CANCELLED"
+    JUP AA0

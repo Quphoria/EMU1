@@ -1,0 +1,95 @@
+  add  r12,  r0, i61
+  add  r13,  r0, i36
+  lbl       512,   0
+  add   r1,  r0,  i2
+  io    r0, i11,  r1
+  io    r1,  i8,  r0
+  cmpul      r1, i40
++ jup       512,  r0
+  add  r50,  r0, i62
+  io    r8,  i9,  r0
+  io    r9,  i9,  r0
+  io   r10,  i9,  r0
+  io   r11,  i9,  r0
+  add   r2,  r0, i14
+  lbl       513,   0
+  io    r1,  i9,  r0
+  st    r1,  r2,  r0
+  add   r2,  r2,  i1
+  cmpul      r2, i50
++ jup       513,  r0
+  add   r2,  r0,  i8
+  lbl       513,   0
+  ld    r1,  r2,  r0
+  io    r0,  i2,  r1
+  add   r2,  r2,  i1
+  cmpul      r2, i51
++ jup       513,  r0
+  cmpeq      r0,  r0
++ cmpeq     r24, i36
++ cmpeq     r21, i36
++ cmpeq     r40, i10
++ cmpeq     r45, i21
++ cmpeq     r11, i28
++ cmpeq     r27, i29
++ cmpeq     r23, i14
++ cmpeq     r39, i22
++ cmpeq     r34, i10
++ cmpeq     r29, i14
++ cmpeq     r14, i18
++ cmpeq     r35, i23
++ cmpeq     r43, i21
++ cmpeq      r9, i22
++ cmpeq      r8, i34
++ cmpeq     r17, i18
++ cmpeq     r18, i16
++ cmpeq     r36, i36
++ cmpeq     r47, i21
++ cmpeq     r20, i29
++ cmpeq     r44, i24
++ cmpeq     r16, i22
++ cmpeq     r15, i36
++ cmpeq     r22, i11
++ cmpeq     r38, i38
++ cmpeq     r48, i24
++ cmpeq     r26, i14
++ cmpeq     r49, i21
++ cmpeq     r37, i33
++ cmpeq     r46, i24
++ cmpeq     r32, i29
++ cmpeq     r25, i11
++ cmpeq     r41, i28
++ cmpeq     r19, i17
++ cmpeq     r33, i17
++ cmpeq     r31, i36
++ cmpeq     r28, i29
++ cmpeq     r10, i10
++ cmpeq     r42, i36
++ cmpeq     r30, i27
++ jdn      4095,  r0
+  add   r1,  r0,  i1
+  io    r0, i11,  r1
+  lbl       513,   0
+  add   r1,  r0, i33
+  io    r0,  i2,  r1
+  add   r1,  r0,  i2
+  io    r1, i11,  r1
+  cmpeq      r1,  i1
++ jdn       513,  r0
+  add   r2,  r0,  i8
+  lbl       514,   0
+  ld    r1,  r2,  r0
+  io    r0, i10,  r1
+  add   r2,  r2,  i1
+  cmpul      r2, i51
++ jup       514,  r0
+  jup       513,  r0
+  lbl       513,   0
+  jdn       512,  r0
+  lbl      4095,   0
+  add   r8,  r0, i33
+  add   r9,  r0, i38
+  add  r10,  r0, i22
+  add  r11,  r0, i10
+  add  r12,  r0, i28
+  add  r13,  r0, i48
