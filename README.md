@@ -11,6 +11,9 @@ It contains different versions, for the differerent design stages of the CTF's E
 
 The best version is **emu_1.0_gamebreak.py**,  
 it is configured to use **paint.rom** and connect to the paint server:  
+emu-1.quphoria.co.uk:1337
+
+The paint gallery is at:
 https://emu-1.quphoria.co.uk
 
 To run it without connecting to a server,  
